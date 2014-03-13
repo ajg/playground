@@ -20,10 +20,10 @@
         }
 
         function flatten(input) {
-          var mode    = input.mode.value,
+          var mode    = checkedValues(input.mode).join(''),
               letters = checkedValues(input.letter).join(''),
               numbers = checkedValues(input.number).join(''),
-              day     = input.day.value;
+              day     = checkedValues(input.day).join('');
           return [mode, letters, numbers, day].join('+');
         }
 
