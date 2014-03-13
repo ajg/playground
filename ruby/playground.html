@@ -8,6 +8,31 @@
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <script>
       var playground = (function() {
+        function play() {
+          var input   = document.forms[1],
+              output  = document.forms[0],
+              query   = flatten(input),
+              meaning = interpret(query);
+
+          output.text.value = [query + ' =', '', meaning].join('\n');
+        }
+
+        function selectTheme(select) {
+          var value = select.options[select.selectedIndex].value,
+              url   = 'https://netdna.bootstrapcdn.com/bootswatch/2.3.2/' + value + '/bootstrap.min.css',
+              links = document.getElementsByTagName('link');
+
+          links[0].href = url;
+        }
+
+        function flatten(input) {
+          var mode    = checkedValues(input.mode).join(''),
+              letters = checkedValues(input.letter).join(''),
+              numbers = checkedValues(input.number).join(''),
+              day     = checkedValues(input.day).join('');
+          return [mode, letters, numbers, day].join('+');
+        }
+
         function checkedValues(elements) {
           var values = [];
           for (var i in elements) {
@@ -17,14 +42,6 @@
             }
           }
           return values;
-        }
-
-        function flatten(input) {
-          var mode    = checkedValues(input.mode).join(''),
-              letters = checkedValues(input.letter).join(''),
-              numbers = checkedValues(input.number).join(''),
-              day     = checkedValues(input.day).join('');
-          return [mode, letters, numbers, day].join('+');
         }
 
         function interpret(query) {
@@ -241,26 +258,9 @@
           }
         }
 
-        function play() {
-          var input   = document.forms[1],
-              output  = document.forms[0],
-              query   = flatten(input),
-              meaning = interpret(query);
-
-          output.text.value = [query, '', meaning].join('\n');
-        }
-
-        function theme(select) {
-          var value = select.options[select.selectedIndex].value,
-              url   = 'https://netdna.bootstrapcdn.com/bootswatch/2.3.2/' + value + '/bootstrap.min.css',
-              links = document.getElementsByTagName('link');
-
-          links[0].href = url;
-        }
-
         return {
-          play:  play,
-          theme: theme
+          play:        play,
+          selectTheme: selectTheme
         };
       })();
     </script>
@@ -293,7 +293,7 @@
           <label><input type="radio" class="input" name="day" value="Tomorrow"  onchange="playground.play();"         /> Tomorrow</label>
           <label><input type="radio" class="input" name="day" value="Yesterday" onchange="playground.play();" checked /> Yesterday</label>
         </div>
-        <select name="theme" class="input" onchange="playground.theme(this);">
+        <select name="theme" class="input" onchange="playground.selectTheme(this);">
           <optgroup label="Theme">
             <option value="amelia">Amelia</option>
             <option value="cerulean">Cerulean</option>
