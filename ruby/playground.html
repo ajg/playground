@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-responsive.min.css" />
     <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" />
     <script>
-      var play = (function() {
+      var playground = (function() {
         function checkedValues(elements) {
           var values = [];
           for (var i in elements) {
@@ -242,46 +242,76 @@
         }
 
         function play() {
-          var input   = document.forms[0],
-              output  = document.forms[1],
+          var input   = document.forms[1],
+              output  = document.forms[0],
               query   = flatten(input),
               meaning = interpret(query);
 
           output.text.value = [query, '', meaning].join('\n');
         }
 
-        return play;
+        function theme(select) {
+          var value = select.options[select.selectedIndex].value,
+              url   = 'http://netdna.bootstrapcdn.com/bootswatch/2.3.2/' + value + '/bootstrap.min.css',
+              links = document.getElementsByTagName('link');
+
+          links[0].href = url;
+        }
+
+        return {
+          play:  play,
+          theme: theme
+        };
       })();
     </script>
   </head>
-  <body onload="play()" class="container-fluid offset2 span9">
-    <h2 >Hi! Welcome to my checkbox playground</h2>
-    <section id="input">
-      <form name="input">
-        <div class="well span2">
-          <label><input type="radio" name="mode" value="Mode 1" onchange="play()"         /> Mode 1</label>
-          <label><input type="radio" name="mode" value="Mode 2" onchange="play()" checked /> Mode 2</label>
-        </div>
-        <div class="well span1">
-          <label><input type="checkbox" name="letter" value="A" onchange="play()" checked /> A</label>
-          <label><input type="checkbox" name="letter" value="B" onchange="play()"         /> B</label>
-          <label><input type="checkbox" name="letter" value="C" onchange="play()" checked /> C</label>
-        </div>
-        <div class="well span1">
-          <label><input type="checkbox" name="number" value="1" onchange="play()" checked /> 1</label>
-          <label><input type="checkbox" name="number" value="2" onchange="play()" checked /> 2</label>
-        </div>
-        <div class="well span2">
-          <label><input type="radio" name="day" value="Today"     onchange="play()"         /> Today</label>
-          <label><input type="radio" name="day" value="Tomorrow"  onchange="play()"         /> Tomorrow</label>
-          <label><input type="radio" name="day" value="Yesterday" onchange="play()" checked /> Yesterday</label>
-        </div>
+  <body onload="playground.play();" class="container-fluid offset2 span9">
+    <h2>Hi! Welcome to my checkbox playground</h2>
+    <section id="output" style="margin-top: 50px;">
+      <form name="output" class="form">
+        <textarea name="text" rows="6" class="span8"></textarea>
       </form>
     </section>
     <br />
-    <section id="output">
-      <form name="output">
-        <textarea name="text" rows="6" class="span8"></textarea>
+    <section id="input">
+      <form name="input" class="form">
+        <div class="well span2">
+          <label><input type="radio" class="input" name="mode" value="Mode 1" onchange="playground.play();"         /> Mode 1</label>
+          <label><input type="radio" class="input" name="mode" value="Mode 2" onchange="playground.play();" checked /> Mode 2</label>
+        </div>
+        <div class="well span1">
+          <label><input type="checkbox" class="input" name="letter" value="A" onchange="playground.play();" checked /> A</label>
+          <label><input type="checkbox" class="input" name="letter" value="B" onchange="playground.play();"         /> B</label>
+          <label><input type="checkbox" class="input" name="letter" value="C" onchange="playground.play();" checked /> C</label>
+        </div>
+        <div class="well span1">
+          <label><input type="checkbox" class="input" name="number" value="1" onchange="playground.play();" checked /> 1</label>
+          <label><input type="checkbox" class="input" name="number" value="2" onchange="playground.play();" checked /> 2</label>
+        </div>
+        <div class="well span2">
+          <label><input type="radio" class="input" name="day" value="Today"     onchange="playground.play();"         /> Today</label>
+          <label><input type="radio" class="input" name="day" value="Tomorrow"  onchange="playground.play();"         /> Tomorrow</label>
+          <label><input type="radio" class="input" name="day" value="Yesterday" onchange="playground.play();" checked /> Yesterday</label>
+        </div>
+        <select name="theme" class="input" onchange="playground.theme(this);">
+          <optgroup label="Theme">
+            <option value="default">Default</option>
+            <option value="amelia">Amelia</option>
+            <option value="cerulean">Cerulean</option>
+            <option value="cosmo">Cosmo</option>
+            <option value="cyborg">Cyborg</option>
+            <option value="flatly">Flatly</option>
+            <option value="journal">Journal</option>
+            <option value="lumen">Lumen</option>
+            <option value="readable">Readable</option>
+            <option value="simplex">Simplex</option>
+            <option value="slate">Slate</option>
+            <option value="spacelab">Spacelab</option>
+            <option value="superhero" selected>Superhero</option>
+            <option value="united">United</option>
+            <option value="yeti">Yeti</option>
+          </optgroup>
+        </select>
       </form>
     </section>
   </body>
