@@ -2,41 +2,64 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootswatch/2.3.2/superhero/bootstrap.min.css" />
+    <link rel="stylesheet" href="" />
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-responsive.min.css" />
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" />
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <script>
-      var playground = (function() {
+      var playground = (function(storage) {
+        var input, output;
+
+        style(storage.getItem('theme') || 'superhero');
+
+        function load() {
+          input  = document.forms[1];
+          output = document.forms[0];
+          var value = storage.getItem('theme');
+
+          if (value) {
+            for (var o in input.theme.options) {
+              var option = input.theme.options[o];
+              option.selected = option.value === value;
+            }
+          }
+
+          play();
+        }
+
         function play() {
-          var input   = document.forms[1],
-              output  = document.forms[0],
-              query   = flatten(input),
+          var query   = flatten(input),
               meaning = interpret(query);
 
           output.text.value = [query + ' =', '', meaning].join('\n');
         }
 
-        function selectTheme(select) {
-          var value = select.options[select.selectedIndex].value,
-              url   = 'https://netdna.bootstrapcdn.com/bootswatch/2.3.2/' + value + '/bootstrap.min.css',
+        function theme() {
+          var theme = input.theme.options[input.theme.selectedIndex].value;
+
+          storage.setItem('theme', theme);
+          style(theme);
+        }
+
+        function style(theme) {
+          var url   = 'https://netdna.bootstrapcdn.com/bootswatch/2.3.2/' + theme + '/bootstrap.min.css',
               links = document.getElementsByTagName('link');
 
           links[0].href = url;
         }
 
-        function flatten(input) {
-          var mode    = checkedValues(input.mode).join(''),
-              letters = checkedValues(input.letter).join(''),
-              numbers = checkedValues(input.number).join(''),
-              day     = checkedValues(input.day).join('');
+        function flatten(form) {
+          var mode    = checkedValues(form.mode).join(''),
+              letters = checkedValues(form.letter).join(''),
+              numbers = checkedValues(form.number).join(''),
+              day     = checkedValues(form.day).join('');
           return [mode, letters, numbers, day].join('+');
         }
 
         function checkedValues(elements) {
           var values = [];
-          for (var i in elements) {
-            var element = elements[i];
+          for (var e in elements) {
+            var element = elements[e];
             if (element.checked) {
               values.push(element.value);
             }
@@ -259,13 +282,14 @@
         }
 
         return {
-          play:        play,
-          selectTheme: selectTheme
+          load:  load,
+          play:  play,
+          theme: theme
         };
-      })();
+      })(window.localStorage);
     </script>
   </head>
-  <body onload="playground.play();" class="container-fluid offset2 span9">
+  <body onload="playground.load();" class="container-fluid offset2 span10">
     <h2>Hi! Welcome to my checkbox playground</h2>
     <section id="output" style="margin-top: 50px;">
       <form name="output" class="form">
@@ -293,7 +317,7 @@
           <label><input type="radio" class="input" name="day" value="Tomorrow"  onchange="playground.play();"         /> Tomorrow</label>
           <label><input type="radio" class="input" name="day" value="Yesterday" onchange="playground.play();" checked /> Yesterday</label>
         </div>
-        <select name="theme" class="input" onchange="playground.selectTheme(this);">
+        <select name="theme" class="input" onchange="playground.theme();">
           <optgroup label="Theme">
             <option value="amelia">Amelia</option>
             <option value="cerulean">Cerulean</option>
@@ -301,7 +325,7 @@
             <option value="cyborg">Cyborg</option>
             <option value="flatly">Flatly</option>
             <option value="journal">Journal</option>
-            <option value="lumen">Lumen</option>
+       <!-- <option value="lumen">Lumen</option> -->
             <option value="readable">Readable</option>
             <option value="simplex">Simplex</option>
             <option value="slate">Slate</option>
