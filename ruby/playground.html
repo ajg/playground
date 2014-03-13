@@ -1,0 +1,287 @@
+<!-- Written for Ruby with <3 by Alvaro J. Genial in March of 2014 -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootswatch/2.3.2/superhero/bootstrap.min.css" />
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-responsive.min.css" />
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" />
+    <script>
+      var play = (function() {
+        function checkedValues(elements) {
+          var values = [];
+          for (var i in elements) {
+            var element = elements[i];
+            if (element.checked) {
+              values.push(element.value);
+            }
+          }
+          return values;
+        }
+
+        function flatten(input) {
+          var mode    = input.mode.value,
+              letters = checkedValues(input.letter).join(''),
+              numbers = checkedValues(input.number).join(''),
+              day     = input.day.value;
+          return [mode, letters, numbers, day].join('+');
+        }
+
+        function interpret(query) {
+          switch (query) {
+            case 'Mode 1+++Today':          return '';
+            case 'Mode 1+++Tomorrow':       return '';
+            case 'Mode 1+++Yesterday':      return '';
+            case 'Mode 1++1+Today':         return '';
+            case 'Mode 1++1+Tomorrow':      return '';
+            case 'Mode 1++1+Yesterday':     return '';
+            case 'Mode 1++2+Today':         return '';
+            case 'Mode 1++2+Tomorrow':      return '';
+            case 'Mode 1++2+Yesterday':     return '';
+            case 'Mode 1++12+Today':        return '';
+            case 'Mode 1++12+Tomorrow':     return '';
+            case 'Mode 1++12+Yesterday':    return '';
+
+            case 'Mode 1+A++Today':         return '';
+            case 'Mode 1+A++Tomorrow':      return '';
+            case 'Mode 1+A++Yesterday':     return '';
+            case 'Mode 1+A+1+Today':        return '';
+            case 'Mode 1+A+1+Tomorrow':     return '';
+            case 'Mode 1+A+1+Yesterday':    return '';
+            case 'Mode 1+A+2+Today':        return '';
+            case 'Mode 1+A+2+Tomorrow':     return '';
+            case 'Mode 1+A+2+Yesterday':    return '';
+            case 'Mode 1+A+12+Today':       return '';
+            case 'Mode 1+A+12+Tomorrow':    return '';
+            case 'Mode 1+A+12+Yesterday':   return '';
+
+            case 'Mode 1+B++Today':         return '';
+            case 'Mode 1+B++Tomorrow':      return '';
+            case 'Mode 1+B++Yesterday':     return '';
+            case 'Mode 1+B+1+Today':        return '';
+            case 'Mode 1+B+1+Tomorrow':     return '';
+            case 'Mode 1+B+1+Yesterday':    return '';
+            case 'Mode 1+B+2+Today':        return '';
+            case 'Mode 1+B+2+Tomorrow':     return '';
+            case 'Mode 1+B+2+Yesterday':    return '';
+            case 'Mode 1+B+12+Today':       return '';
+            case 'Mode 1+B+12+Tomorrow':    return '';
+            case 'Mode 1+B+12+Yesterday':   return '';
+
+            case 'Mode 1+C++Today':         return '';
+            case 'Mode 1+C++Tomorrow':      return '';
+            case 'Mode 1+C++Yesterday':     return '';
+            case 'Mode 1+C+1+Today':        return '';
+            case 'Mode 1+C+1+Tomorrow':     return '';
+            case 'Mode 1+C+1+Yesterday':    return '';
+            case 'Mode 1+C+2+Today':        return '';
+            case 'Mode 1+C+2+Tomorrow':     return '';
+            case 'Mode 1+C+2+Yesterday':    return '';
+            case 'Mode 1+C+12+Today':       return '';
+            case 'Mode 1+C+12+Tomorrow':    return '';
+            case 'Mode 1+C+12+Yesterday':   return '';
+
+            case 'Mode 1+AB++Today':        return '';
+            case 'Mode 1+AB++Tomorrow':     return '';
+            case 'Mode 1+AB++Yesterday':    return '';
+            case 'Mode 1+AB+1+Today':       return '';
+            case 'Mode 1+AB+1+Tomorrow':    return '';
+            case 'Mode 1+AB+1+Yesterday':   return '';
+            case 'Mode 1+AB+2+Today':       return '';
+            case 'Mode 1+AB+2+Tomorrow':    return '';
+            case 'Mode 1+AB+2+Yesterday':   return '';
+            case 'Mode 1+AB+12+Today':      return '';
+            case 'Mode 1+AB+12+Tomorrow':   return '';
+            case 'Mode 1+AB+12+Yesterday':  return '';
+
+            case 'Mode 1+BC++Today':        return '';
+            case 'Mode 1+BC++Tomorrow':     return '';
+            case 'Mode 1+BC++Yesterday':    return '';
+            case 'Mode 1+BC+1+Today':       return '';
+            case 'Mode 1+BC+1+Tomorrow':    return '';
+            case 'Mode 1+BC+1+Yesterday':   return '';
+            case 'Mode 1+BC+2+Today':       return '';
+            case 'Mode 1+BC+2+Tomorrow':    return '';
+            case 'Mode 1+BC+2+Yesterday':   return '';
+            case 'Mode 1+BC+12+Today':      return '';
+            case 'Mode 1+BC+12+Tomorrow':   return '';
+            case 'Mode 1+BC+12+Yesterday':  return '';
+
+            case 'Mode 1+AC++Today':        return '';
+            case 'Mode 1+AC++Tomorrow':     return '';
+            case 'Mode 1+AC++Yesterday':    return '';
+            case 'Mode 1+AC+1+Today':       return '';
+            case 'Mode 1+AC+1+Tomorrow':    return '';
+            case 'Mode 1+AC+1+Yesterday':   return '';
+            case 'Mode 1+AC+2+Today':       return '';
+            case 'Mode 1+AC+2+Tomorrow':    return '';
+            case 'Mode 1+AC+2+Yesterday':   return '';
+            case 'Mode 1+AC+12+Today':      return '';
+            case 'Mode 1+AC+12+Tomorrow':   return '';
+            case 'Mode 1+AC+12+Yesterday':  return '';
+
+            case 'Mode 1+ABC++Today':       return '';
+            case 'Mode 1+ABC++Tomorrow':    return '';
+            case 'Mode 1+ABC++Yesterday':   return '';
+            case 'Mode 1+ABC+1+Today':      return '';
+            case 'Mode 1+ABC+1+Tomorrow':   return '';
+            case 'Mode 1+ABC+1+Yesterday':  return '';
+            case 'Mode 1+ABC+2+Today':      return '';
+            case 'Mode 1+ABC+2+Tomorrow':   return '';
+            case 'Mode 1+ABC+2+Yesterday':  return '';
+            case 'Mode 1+ABC+12+Today':     return '';
+            case 'Mode 1+ABC+12+Tomorrow':  return '';
+            case 'Mode 1+ABC+12+Yesterday': return '';
+
+            case 'Mode 2+++Today':          return '';
+            case 'Mode 2+++Tomorrow':       return '';
+            case 'Mode 2+++Yesterday':      return '';
+            case 'Mode 2++1+Today':         return '';
+            case 'Mode 2++1+Tomorrow':      return '';
+            case 'Mode 2++1+Yesterday':     return '';
+            case 'Mode 2++2+Today':         return '';
+            case 'Mode 2++2+Tomorrow':      return '';
+            case 'Mode 2++2+Yesterday':     return '';
+            case 'Mode 2++12+Today':        return '';
+            case 'Mode 2++12+Tomorrow':     return '';
+            case 'Mode 2++12+Yesterday':    return '';
+
+            case 'Mode 2+A++Today':         return '';
+            case 'Mode 2+A++Tomorrow':      return '';
+            case 'Mode 2+A++Yesterday':     return '';
+            case 'Mode 2+A+1+Today':        return '';
+            case 'Mode 2+A+1+Tomorrow':     return '';
+            case 'Mode 2+A+1+Yesterday':    return '';
+            case 'Mode 2+A+2+Today':        return '';
+            case 'Mode 2+A+2+Tomorrow':     return '';
+            case 'Mode 2+A+2+Yesterday':    return '';
+            case 'Mode 2+A+12+Today':       return '';
+            case 'Mode 2+A+12+Tomorrow':    return '';
+            case 'Mode 2+A+12+Yesterday':   return '';
+
+            case 'Mode 2+B++Today':         return '';
+            case 'Mode 2+B++Tomorrow':      return '';
+            case 'Mode 2+B++Yesterday':     return '';
+            case 'Mode 2+B+1+Today':        return '';
+            case 'Mode 2+B+1+Tomorrow':     return '';
+            case 'Mode 2+B+1+Yesterday':    return '';
+            case 'Mode 2+B+2+Today':        return '';
+            case 'Mode 2+B+2+Tomorrow':     return '';
+            case 'Mode 2+B+2+Yesterday':    return '';
+            case 'Mode 2+B+12+Today':       return '';
+            case 'Mode 2+B+12+Tomorrow':    return '';
+            case 'Mode 2+B+12+Yesterday':   return '';
+
+            case 'Mode 2+C++Today':         return '';
+            case 'Mode 2+C++Tomorrow':      return '';
+            case 'Mode 2+C++Yesterday':     return '';
+            case 'Mode 2+C+1+Today':        return '';
+            case 'Mode 2+C+1+Tomorrow':     return '';
+            case 'Mode 2+C+1+Yesterday':    return '';
+            case 'Mode 2+C+2+Today':        return '';
+            case 'Mode 2+C+2+Tomorrow':     return '';
+            case 'Mode 2+C+2+Yesterday':    return '';
+            case 'Mode 2+C+12+Today':       return '';
+            case 'Mode 2+C+12+Tomorrow':    return '';
+            case 'Mode 2+C+12+Yesterday':   return '';
+
+            case 'Mode 2+AB++Today':        return '';
+            case 'Mode 2+AB++Tomorrow':     return '';
+            case 'Mode 2+AB++Yesterday':    return '';
+            case 'Mode 2+AB+1+Today':       return '';
+            case 'Mode 2+AB+1+Tomorrow':    return '';
+            case 'Mode 2+AB+1+Yesterday':   return '';
+            case 'Mode 2+AB+2+Today':       return '';
+            case 'Mode 2+AB+2+Tomorrow':    return '';
+            case 'Mode 2+AB+2+Yesterday':   return '';
+            case 'Mode 2+AB+12+Today':      return '';
+            case 'Mode 2+AB+12+Tomorrow':   return '';
+            case 'Mode 2+AB+12+Yesterday':  return '';
+
+            case 'Mode 2+BC++Today':        return '';
+            case 'Mode 2+BC++Tomorrow':     return '';
+            case 'Mode 2+BC++Yesterday':    return '';
+            case 'Mode 2+BC+1+Today':       return '';
+            case 'Mode 2+BC+1+Tomorrow':    return '';
+            case 'Mode 2+BC+1+Yesterday':   return '';
+            case 'Mode 2+BC+2+Today':       return '';
+            case 'Mode 2+BC+2+Tomorrow':    return '';
+            case 'Mode 2+BC+2+Yesterday':   return '';
+            case 'Mode 2+BC+12+Today':      return '';
+            case 'Mode 2+BC+12+Tomorrow':   return '';
+            case 'Mode 2+BC+12+Yesterday':  return '';
+
+            case 'Mode 2+AC++Today':        return '';
+            case 'Mode 2+AC++Tomorrow':     return '';
+            case 'Mode 2+AC++Yesterday':    return '';
+            case 'Mode 2+AC+1+Today':       return '';
+            case 'Mode 2+AC+1+Tomorrow':    return '';
+            case 'Mode 2+AC+1+Yesterday':   return '';
+            case 'Mode 2+AC+2+Today':       return '';
+            case 'Mode 2+AC+2+Tomorrow':    return '';
+            case 'Mode 2+AC+2+Yesterday':   return '';
+            case 'Mode 2+AC+12+Today':      return '';
+            case 'Mode 2+AC+12+Tomorrow':   return '';
+            case 'Mode 2+AC+12+Yesterday':  return 'Lala\nLoo Loo\nLee';
+
+            case 'Mode 2+ABC++Today':       return '';
+            case 'Mode 2+ABC++Tomorrow':    return '';
+            case 'Mode 2+ABC++Yesterday':   return '';
+            case 'Mode 2+ABC+1+Today':      return '';
+            case 'Mode 2+ABC+1+Tomorrow':   return '';
+            case 'Mode 2+ABC+1+Yesterday':  return '';
+            case 'Mode 2+ABC+2+Today':      return '';
+            case 'Mode 2+ABC+2+Tomorrow':   return '';
+            case 'Mode 2+ABC+2+Yesterday':  return '';
+            case 'Mode 2+ABC+12+Today':     return '';
+            case 'Mode 2+ABC+12+Tomorrow':  return '';
+            case 'Mode 2+ABC+12+Yesterday': return '';
+
+            return 'This must not happen in production!';
+          }
+        }
+
+        function play() {
+          var input   = document.forms[0],
+              output  = document.forms[1],
+              query   = flatten(input),
+              meaning = interpret(query);
+
+          output.text.value = [query, '', meaning].join('\n');
+        }
+
+        return play;
+      })();
+    </script>
+  </head>
+  <body onload="play()" class="container-fluid offset2 span9">
+    <h2 >Hi! Welcome to my checkbox playground</h2>
+    <section id="input">
+      <form name="input">
+        <div class="well span2">
+          <label><input type="radio" name="mode" value="Mode 1" onchange="play()"         /> Mode 1</label>
+          <label><input type="radio" name="mode" value="Mode 2" onchange="play()" checked /> Mode 2</label>
+        </div>
+        <div class="well span1">
+          <label><input type="checkbox" name="letter" value="A" onchange="play()" checked /> A</label>
+          <label><input type="checkbox" name="letter" value="B" onchange="play()"         /> B</label>
+          <label><input type="checkbox" name="letter" value="C" onchange="play()" checked /> C</label>
+        </div>
+        <div class="well span1">
+          <label><input type="checkbox" name="number" value="1" onchange="play()" checked /> 1</label>
+          <label><input type="checkbox" name="number" value="2" onchange="play()" checked /> 2</label>
+        </div>
+        <div class="well span2">
+          <label><input type="radio" name="day" value="Today"     onchange="play()"         /> Today</label>
+          <label><input type="radio" name="day" value="Tomorrow"  onchange="play()"         /> Tomorrow</label>
+          <label><input type="radio" name="day" value="Yesterday" onchange="play()" checked /> Yesterday</label>
+        </div>
+      </form>
+    </section>
+    <br />
+    <section id="output">
+      <form name="output">
+        <textarea name="text" rows="6" class="span8"></textarea>
+      </form>
+    </section>
+  </body>
+</html>
